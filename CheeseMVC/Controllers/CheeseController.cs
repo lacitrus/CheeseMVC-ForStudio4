@@ -10,7 +10,7 @@ namespace CheeseMVC.Controllers
 {
     public class CheeseController : Controller
     {
-        static private List<string> Cheeses = new List<string>();
+        static private Dictionary<string, string> Cheeses = new Dictionary<string, string>();
 
 
         // GET: /<controller>/
@@ -29,13 +29,24 @@ namespace CheeseMVC.Controllers
         // Use [Route("/Cheese/Add")] to direct the form data
         // submition to this method. Or in the form, use 
         // action="NewCheese" to direct the form submition like what I am doing now
-        public IActionResult NewCheese(string name)
+        public IActionResult NewCheese(string name, string description)
         {
-            Cheeses.Add(name);
+            Cheeses.Add(name, description);
             return Redirect("/Cheese");
         }
 
 
+        public IActionResult Remove()
+        {
+            ViewBag.cheeses = Cheeses;
+            return View();
+        }
+
+        public IActionResult Delete(string name)
+        {
+            Cheeses.Remove(name);
+            return Redirect("/Cheese");
+        }
         public IActionResult Index2()
         {
             // Could return a page in a different controller folder like Home (Yi)

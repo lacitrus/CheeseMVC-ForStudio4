@@ -2,7 +2,7 @@
 
 
 @{
-    Layout = null;
+    
 
    
 }
@@ -17,8 +17,9 @@
 }
 
 <ul>
-    @foreach (var cheese in ViewBag.cheeses)
+    @foreach (KeyValuePair<string, string> cheese in ViewBag.cheeses)
     {
-        <li>@cheese</li>
+    <li>@cheese.Key  : @cheese.Value</li>
+
     }
 </ul>
